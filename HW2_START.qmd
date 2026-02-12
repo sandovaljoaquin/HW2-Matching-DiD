@@ -135,7 +135,7 @@ Spillover contaminates the control group. If control precincts near treatment pr
 
 *Response:*
 
-Stokes used distance buffers to see how far the spillover effect extends. To mitigate spillover bias, what would have been control precincts within 3 kilometers of a precinct with a turbine are excluded from the control group.
+Stokes used distance buffers to see how far the spillover effect extends. To mitigate spillover bias, what would have been control precincts within 6 kilometers of a precinct with a turbine are excluded from the control group.
 
 ------------------------------------------------------------------------
 
@@ -218,11 +218,7 @@ Wind turbines are placed in rural areas with available land and wind. These area
 
 *Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-Treatment indicator: binary variable showing which units received treatment (e.g.`proposed_turbine_3km`)
-
-Outcome variable: Dependent variable the study is measuring (e.g.`change_liberal`)
-
-Observed covariates: Pre-treatment variables to match on (e.g. `log_home_val_07`, `p_uni_degree`, `log_median_inc`, `log_pop_denc`)
+Multiple pre-treatment covariates and many control observations. 
 
 ------------------------------------------------------------------------
 
@@ -392,7 +388,7 @@ summ(reg_match, model.fit = FALSE)
 
 *Response:* 
 
-Yes, we've identified a causal estimate using this approach. The estimated effect of treatment on change in liberal party vote share is -6%. 
+We have not yet identified a causal estimate. Matching on observed confounders reduces bias but there are potentially unobserved confounders that could affect both turbine placement/vote share and contribute to omitted variable bias. 
 
 **2F.Q2** When using a matching method, what is the main threat to causal identification?
 
@@ -614,7 +610,7 @@ summ(model1_ff, model.fit = FALSE,
 
 *Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-No, it is 1.858 to 1 (Absolute value of the t statistic) which is below the 2 to 1 threshold.
+The signal to noise ratio for the treatment estimate is not greater than 2 to 1 ratio.
 
 > HINT: Add the argument `digits = 3` to the `summ()` function above
 
